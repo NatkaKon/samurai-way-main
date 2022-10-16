@@ -7,26 +7,17 @@
     'nav content';
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 10px;
+    grid-gap: 5px;
 
 }
 
-.header {
-    grid-area: header;
-    background-color: lightslategrey;
-}
-.header img {
-  width: 60px;
-}
-.nav {
-    grid-area: nav;
-    background-color: darkgray;
-}
+.app-wrapper-content {
 
-.content {
     grid-area: content;
     background-color: cadetblue;
+
 }
-.content img{
-    width: 100%;
-}
+
+
+
+
