@@ -1,22 +1,23 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {PostType} from '../../../Redax/State';
 
 type MyPostsPropsType = {
     posts: PostType[]
-    addPost: (postText:string) => void
+    addPost: (postText: string) => void
+    newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-
     const addPost = () => {
-        if (newPostElement.current) {
-            props.addPost(newPostElement.current.value)
-            newPostElement.current.value=''
-        }
+        props.addPost(props.newPostText)
+        props.updateNewPostText('')
+    }
 
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
     }
 
     return (
@@ -24,7 +25,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea
+                        onChange={onChangeHandler}
+                        value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

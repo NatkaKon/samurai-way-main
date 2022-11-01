@@ -13,7 +13,8 @@ import {RootStateType} from './Redax/State';
 
 type AppPropsType = {
     state: RootStateType
-    addPost:(postText:string)=> void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -33,6 +34,8 @@ function App(props: AppPropsType) {
                     <Route path="/profile"
                            render={() => <Profile posts={props.state.profilePage.posts}
                                                   addPost={props.addPost}
+                                                  newPostText={props.state.profilePage.newPostText}
+                                                  updateNewPostText={props.updateNewPostText}
                            />}
                     />
                     <Route path="/news" render={() => <News/>}/>
