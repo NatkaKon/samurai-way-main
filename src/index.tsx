@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import {rerenderEntireTree} from './render';
-import {state} from './Redax/State';
+import {store} from './Redax/State';
 
-
-rerenderEntireTree(state);
+store.subscribe(rerenderEntireTree)
+rerenderEntireTree()

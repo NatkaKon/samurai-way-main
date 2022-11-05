@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {RootStateType} from './Redax/State';
+import {RootStateType, store, StoreType} from './Redax/State';
 
 
 type AppPropsType = {
@@ -16,9 +16,13 @@ type AppPropsType = {
     addPost: () => void
     updateNewPostText: (newText: string) => void
 }
+type PropsType = {
+    store: StoreType
+}
 
-function App(props: AppPropsType) {
+export const App: React.FC<PropsType> = (props) => {
 
+    const state = store.getState()
 
     return (
         <BrowserRouter>
@@ -27,15 +31,15 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
-                           render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                  messages={props.state.dialogsPage.messages}
+                           render={() => <Dialogs dialogs={props.store._state.dialogsPage.dialogs}
+                                                  messages={props.store._state.dialogsPage.messages}
                            />}
                     />
                     <Route path="/profile"
-                           render={() => <Profile posts={props.state.profilePage.posts}
-                                                  addPost={props.addPost}
-                                                  newPostText={props.state.profilePage.newPostText}
-                                                  updateNewPostText={props.updateNewPostText}
+                           render={() => <Profile posts={props.store._state.profilePage.posts}
+                                                  addPost={props.store.addPost.bind(props.store)}
+                                                  newPostText={props.store._state.profilePage.newPostText}
+                                                  updateNewPostText={props.store.changeNewText.bind(props.store)}
                            />}
                     />
                     <Route path="/news" render={() => <News/>}/>
@@ -48,4 +52,4 @@ function App(props: AppPropsType) {
 }
 
 
-export default App;
+

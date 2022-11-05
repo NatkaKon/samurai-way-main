@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import {addPost, RootStateType, updateNewPostText} from './Redax/State'
+import {App} from './App';
 import {BrowserRouter} from 'react-router-dom';
+import {store} from './Redax/State';
 
-export const rerenderEntireTree = (state: RootStateType) => {
+export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+            <App store={store} />
         </BrowserRouter>, document.getElementById('root'));
 }
