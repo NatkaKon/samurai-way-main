@@ -1,18 +1,20 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
-import {PostType} from '../../../Redax/State';
+import {ActionsType, addPostAC, PostType} from '../../../Redax/State';
 
 type MyPostsPropsType = {
     posts: PostType[]
     addPost: (postText: string) => void
     newPostText: string
     updateNewPostText: (newText: string) => void
+    dispatch:(action:ActionsType)=>void
+
 }
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost = () => {
-        props.addPost(props.newPostText)
+        props.dispatch(addPostAC(props.newPostText))
         props.updateNewPostText('')
     }
 

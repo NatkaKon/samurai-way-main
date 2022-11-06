@@ -1,11 +1,3 @@
-export type StoreType = {
-    _state: RootStateType
-    changeNewText: (newText: string) => void
-    addPost: (ostText: string) => void
-    _onChange: () => void
-    subscribe: (callBack: () => void) => void
-    getState:()=>RootStateType
-}
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
@@ -30,6 +22,34 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+}
+export type StoreType = {
+    _state: RootStateType
+    updateNewPostText: (newText: string) => void
+    addPost: (postText: string) => void
+    _onChange: () => void
+    subscribe: (callBack: () => void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionsType) => void
+}
+
+type AddPostActionType = ReturnType<typeof addPostAC>
+
+type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
+
+export type ActionsType = AddPostActionType | ChangeNewTextActionType
+
+export const addPostAC = (postText: string) => {
+    return {
+        type: 'ADD-POST',
+        postText: postText
+    } as const
+}
+export const changeNewTextAC = (newText: string) => {
+    return {
+        type: 'CHANGE-NEW-TEXT',
+        newText: newText
+    } as const
 }
 
 export const store: StoreType = {
@@ -56,11 +76,11 @@ export const store: StoreType = {
             ],
         }
     },
-    getState() {
-        return this._state;
-    },
     _onChange() {
         console.log('state change')
+    },
+    getState() {
+        return this._state;
     },
     subscribe(callBack) {
         this._onChange = callBack
@@ -74,8 +94,22 @@ export const store: StoreType = {
         this._state.profilePage.posts.push(newPost)
         this._onChange()
     },
-    changeNewText(newText: string) {
+    updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText
         this._onChange()
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: new Date().getTime(),
+                message: action.postText,
+                likesCount: '0'
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._onChange()
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._onChange()
+        }
     }
 }

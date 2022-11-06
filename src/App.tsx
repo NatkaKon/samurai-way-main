@@ -8,21 +8,22 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {RootStateType, store, StoreType} from './Redax/State';
+import {StoreType} from './Redax/State';
 
 
-type AppPropsType = {
-    state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-}
+// type AppPropsType = {
+//     state: RootStateType
+//     addPost: () => void
+//     updateNewPostText: (newText: string) => void
+// }
+
 type PropsType = {
     store: StoreType
 }
 
 export const App: React.FC<PropsType> = (props) => {
 
-    const state = store.getState()
+    const state = props.store.getState()
 
     return (
         <BrowserRouter>
@@ -31,15 +32,16 @@ export const App: React.FC<PropsType> = (props) => {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
-                           render={() => <Dialogs dialogs={props.store._state.dialogsPage.dialogs}
-                                                  messages={props.store._state.dialogsPage.messages}
+                           render={() => <Dialogs dialogs={state.dialogsPage.dialogs}
+                                                  messages={state.dialogsPage.messages}
                            />}
                     />
                     <Route path="/profile"
-                           render={() => <Profile posts={props.store._state.profilePage.posts}
+                           render={() => <Profile posts={state.profilePage.posts}
+                                                  dispatch={props.store.dispatch.bind(props.store)}
                                                   addPost={props.store.addPost.bind(props.store)}
                                                   newPostText={props.store._state.profilePage.newPostText}
-                                                  updateNewPostText={props.store.changeNewText.bind(props.store)}
+                                                  updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                            />}
                     />
                     <Route path="/news" render={() => <News/>}/>
