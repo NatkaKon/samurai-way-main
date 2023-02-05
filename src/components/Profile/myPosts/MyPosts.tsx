@@ -3,6 +3,7 @@ import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {ActionsType, addPostAC, PostType} from '../../../redux/State';
 
+
 type MyPostsPropsType = {
     posts: PostType[]
     addPost: (postText: string) => void
@@ -14,7 +15,7 @@ type MyPostsPropsType = {
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost = () => {
-        props.dispatch(addPostAC(props.newPostText))
+        props.dispatch(addPostAC())
         props.updateNewPostText('')
     }
 

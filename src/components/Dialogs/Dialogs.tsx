@@ -5,6 +5,7 @@ import {DialogItem} from './DialogItem/DialogItem';
 import {DialogPageType, sendMessageAC, store, updateNewMessageBodyAC} from '../../redux/State';
 
 
+
 export const Dialogs = (props: DialogPageType) => {
 
 

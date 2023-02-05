@@ -37,31 +37,35 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-type AddPostActionType = ReturnType<typeof addPostAC>
+export type AddPostActionType = ReturnType<typeof addPostAC>
 type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
 type SendMessageACType = ReturnType<typeof sendMessageAC>
 
 export type ActionsType = AddPostActionType | ChangeNewTextActionType | UpdateNewMessageBodyType | SendMessageACType
 
-export const addPostAC = (postText: string) => {
+
+export const addPostAC = () => {
     return {
         type: ADD_POST,
-        postText: postText
     } as const
 }
+
+
 export const changeNewTextAC = (newText: string) => {
     return {
         type: CHANGE_NEW_TEXT,
         newText: newText
     } as const
 }
+
 export const updateNewMessageBodyAC = (newMessageBody: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_BODY,
         messageBody: newMessageBody
     } as const
 }
+
 export const sendMessageAC = () => {
     return {
         type: SEND_MESSAGE,
@@ -117,8 +121,8 @@ export const store: StoreType = {
         this._onChange()
     },
     dispatch(action) {
-        this._state.profilePage= profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage= dialogsReducer(this._state.dialogsPage, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
         this._onChange()
     }
