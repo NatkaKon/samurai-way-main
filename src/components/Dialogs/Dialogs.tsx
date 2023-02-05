@@ -1,14 +1,24 @@
-import React from "react";
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
-import {Message} from "./Message/Message";
-import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogPageType} from '../../Redax/State';
+import {Message} from './Message/Message';
+import {DialogItem} from './DialogItem/DialogItem';
+import {DialogPageType, sendMessageAC, store, updateNewMessageBodyAC} from '../../Redax/State';
 
 
 export const Dialogs = (props: DialogPageType) => {
 
-    let dialogsElements = props.dialogs.map(el=><DialogItem name={el.name} id={el.id} key={el.id}/>)
-    let messagesElements = props.messages.map(el=> <Message message={el.message} key={el.id}/>)
+
+    let dialogsElements = props.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id}/>)
+    let messagesElements = props.messages.map(el => <Message message={el.message} key={el.id}/>)
+    let newMessageBody = props.newMessageBody
+
+    const onSendMessageClick = () => {
+        store.dispatch(sendMessageAC())
+    }
+    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = e.currentTarget.value
+        store.dispatch(updateNewMessageBodyAC(body))
+    }
 
     return (
         <div className={s.dialogs}>
@@ -16,7 +26,13 @@ export const Dialogs = (props: DialogPageType) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div><textarea value={newMessageBody}
+                               onChange={onNewMessageChange}
+                               placeholder="Enter your message"></textarea></div>
+                <div>
+                    <button onClick={onSendMessageClick}>Send</button>
+                </div>
             </div>
         </div>
     )

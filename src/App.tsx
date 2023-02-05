@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {StoreType} from './Redax/State';
+import { StoreType} from './Redax/State';
 
 
 // type AppPropsType = {
@@ -32,8 +32,11 @@ export const App: React.FC<PropsType> = (props) => {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
-                           render={() => <Dialogs dialogs={state.dialogsPage.dialogs}
-                                                  messages={state.dialogsPage.messages}
+                           render={() => <Dialogs
+
+                               dialogs={state.dialogsPage.dialogs}
+                               messages={state.dialogsPage.messages}
+                               newMessageBody={state.dialogsPage.newMessageBody}
                            />}
                     />
                     <Route path="/profile"
