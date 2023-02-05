@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {Message} from './Message/Message';
 import {DialogItem} from './DialogItem/DialogItem';
-import {DialogPageType, sendMessageAC, store, updateNewMessageBodyAC} from '../../Redax/State';
+import {DialogPageType, sendMessageAC, store, updateNewMessageBodyAC} from '../../redux/State';
 
 
 export const Dialogs = (props: DialogPageType) => {
