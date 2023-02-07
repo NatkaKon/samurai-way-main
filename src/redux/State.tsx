@@ -1,5 +1,5 @@
-import {ADD_POST, CHANGE_NEW_TEXT, profileReducer} from './profile-reducer';
-import {dialogsReducer, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from './dialogs-reducer';
+import {profileReducer,ChangeNewTextActionType, AddPostActionType} from './profile-reducer';
+import {dialogsReducer, UpdateNewMessageBodyType, SendMessageACType} from './dialogs-reducer';
 
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -37,40 +37,11 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type AddPostActionType = ReturnType<typeof addPostAC>
-type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
-type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
-type SendMessageACType = ReturnType<typeof sendMessageAC>
+
 
 export type ActionsType = AddPostActionType | ChangeNewTextActionType | UpdateNewMessageBodyType | SendMessageACType
 
 
-export const addPostAC = () => {
-    return {
-        type: ADD_POST,
-    } as const
-}
-
-
-export const changeNewTextAC = (newText: string) => {
-    return {
-        type: CHANGE_NEW_TEXT,
-        newText: newText
-    } as const
-}
-
-export const updateNewMessageBodyAC = (newMessageBody: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        messageBody: newMessageBody
-    } as const
-}
-
-export const sendMessageAC = () => {
-    return {
-        type: SEND_MESSAGE,
-    } as const
-}
 
 
 export const store: StoreType = {
