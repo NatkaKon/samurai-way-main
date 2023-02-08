@@ -1,48 +1,5 @@
-import {profileReducer,ChangeNewTextActionType, AddPostActionType} from './profile-reducer';
+import {profileReducer, ChangeNewTextActionType, AddPostActionType} from './profile-reducer';
 import {dialogsReducer, UpdateNewMessageBodyType, SendMessageACType} from './dialogs-reducer';
-
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogPageType
-}
-type MessageType = {
-    id: number
-    message: string
-}
-export type DialogType = {
-    id: number
-    name: string
-}
-export type PostType = {
-    id: number
-    message: string
-    likesCount: string
-}
-export type ProfilePageType = {
-    posts: Array<PostType>
-    newPostText: string
-}
-export type DialogPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-    newMessageBody: string
-}
-export type StoreType = {
-    _state: RootStateType
-    updateNewPostText: (newText: string) => void
-    addPost: (postText: string) => void
-    _onChange: () => void
-    subscribe: (callBack: () => void) => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsType) => void
-}
-
-
-
-export type ActionsType = AddPostActionType | ChangeNewTextActionType | UpdateNewMessageBodyType | SendMessageACType
-
-
-
 
 export const store: StoreType = {
     _state: {
@@ -98,3 +55,47 @@ export const store: StoreType = {
         this._onChange()
     }
 }
+
+//types
+
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogPageType
+}
+type MessageType = {
+    id: number
+    message: string
+}
+export type DialogType = {
+    id: number
+    name: string
+}
+export type PostType = {
+    id: number
+    message: string
+    likesCount: string
+}
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody: string
+}
+export type StoreType = {
+    _state: RootStateType
+    updateNewPostText: (newText: string) => void
+    addPost: (postText: string) => void
+    _onChange: () => void
+    subscribe: (callBack: () => void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionsType) => void
+}
+
+
+export type ActionsType = AddPostActionType
+    | ChangeNewTextActionType
+    | UpdateNewMessageBodyType
+    | SendMessageACType
