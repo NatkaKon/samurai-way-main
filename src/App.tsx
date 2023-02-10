@@ -22,12 +22,10 @@ export const App = (props:AppPropsType) => {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path={"/dialogs"}
-                           render={() => <DialogsContainer store={props.store}
-                           />}
+                           render={() => <DialogsContainer/>}
                     />
                     <Route path={"/profile"}
-                           render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch}
-                           />}
+                           render={() => <Profile/>}
                     />
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
@@ -38,11 +36,7 @@ export const App = (props:AppPropsType) => {
     );
 }
 
-type AppPropsType = {
-    state: RootStateType,
-    dispatch: (e: ActionsType) => void
-    store:storeType
-}
+type AppPropsType = {}
 
 export type RootStateType = {
     profilePage: ProfilePageType
