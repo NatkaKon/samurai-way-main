@@ -1,4 +1,5 @@
-import {ActionsType, ProfilePageType} from './store';
+import {ActionsType} from './store';
+import {ProfilePageType} from '../App';
 
 export const ADD_POST = 'ADD-POST'
 export const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'

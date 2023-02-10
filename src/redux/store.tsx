@@ -58,7 +58,7 @@ export const store: StoreType = {
 
 //types
 
-export type RootStateType = {
+ type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
 }
@@ -66,25 +66,25 @@ type MessageType = {
     id: number
     message: string
 }
-export type DialogType = {
+ type DialogType = {
     id: number
     name: string
 }
-export type PostType = {
+ type PostType = {
     id: number
     message: string
     likesCount: string
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-export type DialogPageType = {
+ type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody: string
 }
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType
     updateNewPostText: (newText: string) => void
     addPost: (postText: string) => void

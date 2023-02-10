@@ -1,31 +1,34 @@
-import React, {ChangeEvent} from 'react';
-import s from './MyPosts.module.css'
-import {Post} from './Post/Post';
-import {ActionsType,  PostType} from '../../../redux/store';
-import {addPostAC} from '../../../redux/profile-reducer';
+import React from 'react';
+import {ActionsType} from '../../../redux/store';
+import {addPostAC, changeNewTextAC} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 
-
-type MyPostsPropsType = {
-    posts: PostType[]
-    addPost: (postText: string) => void
-    newPostText: string
-    updateNewPostText: (newText: string) => void
-    dispatch:(action:ActionsType)=>void
-
+type PostType = {
+    id: number
+    message: string
+    likesCount: string
 }
-export const MyPostsContainer = (props: MyPostsPropsType) => {
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+export type StatePropsType = {
+    state: ProfilePageType
+    dispatch: (e: ActionsType) => void
+}
+export const MyPostsContainer = (props: StatePropsType) => {
 
     const addPost = () => {
-        props.updateNewPostText('')
         props.dispatch(addPostAC())
     }
 
-    const onChangeHandler = (text:string) => {
-        // props.updateNewPostText(e.currentTarget.value)
-        props.dispatch()
+    const onChangeHandler = (text: string) => {
+        props.dispatch(changeNewTextAC(text))
     }
 
-    return <MyPosts posts={} addPost={} newPostText={} updateNewPostText={()=>{onChangeHandler} dispatch={}/>
-
+return <MyPosts posts={props.state.posts}
+                addPost={addPost}
+                newPostText={props.state.newPostText}
+                updateNewPostText={onChangeHandler}
+                dispatch={props.dispatch}/>
 }

@@ -14,4 +14,9 @@ let reducers=combineReducers({
     dialogsPage:dialogsReducer
 })
 export let store:StoreType=createStore(reducers)
+export type storeType = typeof store
 
+
+// export type stateType = ReturnType<typeof reducers>
+// let store = createStore(reducers)/
+// export type storeType = typeof store
